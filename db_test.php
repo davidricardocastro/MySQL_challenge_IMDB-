@@ -52,24 +52,20 @@ echo $data[0]['length'];
 
 
    <?php
-   $query3 ="
-SELECT `imdb_movie_has_genre`.`imdb_movie_id`, `imdb_genre`.`name`
-FROM `imdb_genre`
-LEFT JOIN `imdb_movie_has_genre`
-    ON `imdb_movie_has_genre`.`imdb_genre_id` = `imdb_genre`.`id`
-      WHERE `imdb_movie_id` = ?
+   $query5 ="
+SELECT `imdb_movie`.`imdb_movie_status_id`, `imdb_movie_status`.`label`
+FROM `imdb_movie`
+LEFT JOIN `imdb_movie_status`
+    ON `imdb_movie`.`imdb_movie_status_id` = `imdb_movie_status`.`id`
+      WHERE `imdb_id` = ?
 ";
-$statement3 = db::query($query3, [$_GET['id']]);
-$data3 = $statement3->fetchAll();
+$statement5 = db::query($query5, [$_GET['id']]);
+$data5 = $statement5->fetchAll();
 
-//var_dump($data3);
+//var_dump($data5);
+echo ($data5[0]['label']);
 ?>
 
-<?php foreach($data3 as $imdb_genre) : ?>
-     <?php echo $imdb_genre['name'].','; ?> 
-    
-    
-    <?php endforeach; ?>
 
 
 

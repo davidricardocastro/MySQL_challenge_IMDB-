@@ -45,6 +45,28 @@ $data3 = $statement3->fetchAll();
 
 
 
+//query for movie type
+$query4 ="
+SELECT `imdb_movie`.`imdb_movie_type_id`, `imdb_movie_type`.`name`
+FROM `imdb_movie`
+LEFT JOIN `imdb_movie_type`
+ ON `imdb_movie`.`imdb_movie_type_id` = `imdb_movie_type`.`id`
+   WHERE `imdb_id` = ?
+";
+$statement4 = db::query($query4, [$_GET['id']]);
+$data4 = $statement4->fetchAll();
+
+$query5 ="
+SELECT `imdb_movie`.`imdb_movie_status_id`, `imdb_movie_status`.`label`
+FROM `imdb_movie`
+LEFT JOIN `imdb_movie_status`
+    ON `imdb_movie`.`imdb_movie_status_id` = `imdb_movie_status`.`id`
+      WHERE `imdb_id` = ?
+";
+$statement5 = db::query($query5, [$_GET['id']]);
+$data5 = $statement5->fetchAll();
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -119,6 +141,8 @@ $data3 = $statement3->fetchAll();
                     <h6>Released: <?php echo $data[0]['year']?></h6>
                     <h6>Rating: &#9733 <?php echo $data[0]['rating']?>/10</h6>
                     <h6>Votes: <?php echo $data[0]['votes_nr']?></h6>
+                    <h6>Type: <?php echo ($data4[0]['name']); ?> </h6>
+                    <h6>Status: <?php echo ($data5[0]['label']);?> </h6>
                     <br>
                     <p><b><?php echo $data2[0]['small_plot']?></b></p>
                 </div>
