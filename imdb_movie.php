@@ -31,7 +31,16 @@ WHERE `imdb_movie_data_web`.`imdb_id`=?
 $statement2 = db::query($query2, [$_GET['id']]);
 $data2 = $statement2->fetchAll();
 
-
+//query for movie genre
+$query3 ="
+SELECT `imdb_movie_has_genre`.`imdb_movie_id`, `imdb_genre`.`name`
+FROM `imdb_genre`
+LEFT JOIN `imdb_movie_has_genre`
+    ON `imdb_movie_has_genre`.`imdb_genre_id` = `imdb_genre`.`id`
+      WHERE `imdb_movie_id` = ?
+";
+$statement3 = db::query($query3, [$_GET['id']]);
+$data3 = $statement3->fetchAll();
 
 
 
@@ -104,7 +113,9 @@ $data2 = $statement2->fetchAll();
                 <div class="col-4 p-3 mb-2 text-white ">
                     <h1><?php echo $data[0]['name']?></h1>
                     <h6>Run time: <?php echo $data[0]['length']?> min</h6>
-                    <h6>Gender:</h6>
+                    <h6>Gender:<?php foreach($data3 as $imdb_genre) : ?>
+                                 <?php echo $imdb_genre['name'].','; ?> 
+                                 <?php endforeach; ?></h6>
                     <h6>Released: <?php echo $data[0]['year']?></h6>
                     <h6>Rating: &#9733 <?php echo $data[0]['rating']?>/10</h6>
                     <h6>Votes: <?php echo $data[0]['votes_nr']?></h6>
