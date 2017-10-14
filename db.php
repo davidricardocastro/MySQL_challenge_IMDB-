@@ -6,7 +6,7 @@ class db
     protected static $host = 'localhost';
     protected static $username = 'root';
     protected static $password = 'rootroot';
-    protected static $database = 'movies_imdb';
+    protected static $database = 'imdb_v3';
 
     protected static $pdo = null;
 

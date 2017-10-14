@@ -67,6 +67,55 @@ $statement5 = db::query($query5, [$_GET['id']]);
 $data5 = $statement5->fetchAll();
 
 
+
+
+//query for cast on movie
+$query8 ="
+SELECT imdb_movie_has_person.description,
+imdb_person.fullname, imdb_position.name
+FROM imdb_movie_has_person INNER JOIN imdb_person
+ON imdb_movie_has_person.imdb_person_id = imdb_person.imdb_id
+INNER JOIN imdb_position
+ON imdb_movie_has_person.imdb_position_id = imdb_position.id
+WHERE imdb_movie_has_person.imdb_movie_id = ? AND imdb_movie_has_person.imdb_position_id = 254
+";
+
+
+$statement8= db::query($query8, [$_GET['id']]);
+$data8 = $statement8->fetchAll();
+
+//query for directores
+$query9 ="
+SELECT imdb_movie_has_person.description,
+imdb_person.fullname, imdb_position.name
+FROM imdb_movie_has_person INNER JOIN imdb_person
+ON imdb_movie_has_person.imdb_person_id = imdb_person.imdb_id
+INNER JOIN imdb_position
+ON imdb_movie_has_person.imdb_position_id = imdb_position.id
+WHERE imdb_movie_has_person.imdb_movie_id = ? AND imdb_movie_has_person.imdb_position_id = 255
+";
+
+
+$statement9= db::query($query9,  [$_GET['id']]);
+$data9 = $statement9->fetchAll();
+
+//query for producers
+$query10="
+SELECT imdb_movie_has_person.description,
+imdb_person.fullname, imdb_position.name
+FROM imdb_movie_has_person INNER JOIN imdb_person
+ON imdb_movie_has_person.imdb_person_id = imdb_person.imdb_id
+INNER JOIN imdb_position
+ON imdb_movie_has_person.imdb_position_id = imdb_position.id
+WHERE imdb_movie_has_person.imdb_movie_id = ? AND imdb_movie_has_person.imdb_position_id = 257
+";
+
+
+$statement10= db::query($query10,  [$_GET['id']]);
+$data10 = $statement10->fetchAll();
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -160,8 +209,45 @@ $data5 = $statement5->fetchAll();
             <div class="row">
 
             <div class="col p-3 mb-2 border rounded bg-dark text-white">
-                    <h5>Directors: </h5>
+                    <h5>Directed by: </h5>
+                    
+                    <?php 
+                        foreach($data9 as $x => $x_value) {
+                        echo $data9[$x]['fullname'].'<br>';
+    
+                        }
+
+
+
+                        ?>
+
+                    <h5>Produced by: </h5>
+                    
+                    <?php 
+                        foreach($data10 as $x => $x_value) {
+                        echo $data10[$x]['fullname'].'<br>';
+    
+                        }
+
+
+
+                        ?>
+
+
                     <h5>Cast: </h5>
+                    <?php foreach($data8 as $x => $x_value) {
+                    echo $data8[$x]['fullname'].' as '.$data8[$x]['description'];
+    
+                    echo "<br>";  
+
+                  
+       
+                            }
+                          ?>  
+                  
+
+
+
                 </div>
                 <div class="col-4 p-5 mb-2 border rounded bg-dark text-white">
                     <div class="embed-responsive embed-responsive-16by9">
@@ -179,7 +265,7 @@ $data5 = $statement5->fetchAll();
         <section id="plot">
             <div class="row">
                 <div class="col p-3 mb-2 border rounded bg-dark text-white">
-                    <h2>Plot:</h2>
+                    <h5>Plot:</h5>
                     <p class="text-justify">
                     <?php echo $data2[0]['plot']?>
                     </p>

@@ -4,33 +4,94 @@
 require_once 'db.php';
 
 
-//write SQL query
-$query = "
-    SELECT *
-    FROM `imdb_movie`
-    WHERE `imdb_movie`.`imdb_id`=?
-    ";
+
+$query6 ="
+SELECT `imdb_movie_has_person`.`imdb_movie_id`, `imdb_person`.`fullname`
+FROM `imdb_movie_has_person`
+LEFT JOIN `imdb_person`
+    ON `imdb_movie_has_person`.`imdb_person_id` = `imdb_person`.`imdb_id`
+    WHERE `imdb_movie_id` = 110912
+";
+
+
+$statement6= db::query($query6);
+$data6 = $statement6->fetchAll();
+
+//var_dump($data6);
+
+
+//query for cast
+$query7 ="
+SELECT `imdb_movie_has_person`.`imdb_movie_id`, `imdb_person`.`fullname`, `imdb_position`.`name`
+FROM `imdb_movie_has_person`
+JOIN `imdb_person` ON `imdb_movie_has_person`.`imdb_person_id` = `imdb_person`.`imdb_id`
+JOIN `imdb_position` ON `imdb_movie_has_person`.`imdb_person_id` = `imdb_person`.`imdb_id`
+
+
+WHERE `imdb_movie_id` = 103064 AND `id` = 255 
+";
+
+
+$statement7= db::query($query7);
+$data7 = $statement7->fetchAll();
+
+//[$_GET['id']]
+
+
+//var_dump($data7);
+//echo ($data6[0]['label']);
+
+//echo $data6[0]['fullname'];
+
+//foreach($data6 as $x => $x_value) {
+//echo $data7[$x]['name'].' '.$data6[$x]['fullname'];
+//echo "<br>"; 
+//}
+
+
+//foreach($data6 as $x => $x_value) {
+
+//   echo $data6[$x]['fullname'];;
+//   echo "<br>";  
+       
+//}
 
 
 
-//run the query
-$statement = db::query($query, ['317219']);
-
-//fetch the results
-$data = $statement->fetchAll();
-
-//var_dump($data);
-
+//query for actores and roles 
+//SELECT imdb_movie_has_person.description,
+//imdb_movie_has_person.imdb_position_id, imdb_person.fullname
+//FROM imdb_movie_has_person INNER JOIN imdb_person
+//ON imdb_movie_has_person.imdb_person_id = imdb_person.imdb_id
+//WHERE imdb_movie_has_person.imdb_movie_id = 103064 AND imdb_movie_has_person.imdb_position_id = 254
 
 
 
-echo $data[0]['length'];
+//query for actores, roles and description(cast, director, etc)
+$query8 ="
+SELECT imdb_movie_has_person.description,
+imdb_person.fullname, imdb_position.name
+FROM imdb_movie_has_person INNER JOIN imdb_person
+ON imdb_movie_has_person.imdb_person_id = imdb_person.imdb_id
+INNER JOIN imdb_position
+ON imdb_movie_has_person.imdb_position_id = imdb_position.id
+WHERE imdb_movie_has_person.imdb_movie_id = 103064 AND imdb_movie_has_person.imdb_position_id = 255
+";
 
 
-//output the results
+$statement8= db::query($query8);
+$data8 = $statement8->fetchAll();
+
+//var_dump($data8);
+
+foreach($data8 as $x => $x_value) {
+       echo $data8[$x]['name'].' '.$data8[$x]['fullname'].' '.$data8[$x]['description'].'<br>';
+    //var_dump($x_value);
+      echo "<br>";  
+}
+        
+     
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,50 +103,22 @@ echo $data[0]['length'];
 <body>
 
 <h1>movies:</h1>
-   
 
 
+<ul>
 
-  
+<!--
+//<?php
+//foreach($data6 as $x => $x_value) {
+//    echo '<li>'.$x_value.'</li>';
+//    echo "<br>";  ?> 
+       
+    
+ //   <?php// endforeach; ?>
+    
+  //  </ul>
 
-
-
-
-   <?php
-   $query5 ="
-SELECT `imdb_movie`.`imdb_movie_status_id`, `imdb_movie_status`.`label`
-FROM `imdb_movie`
-LEFT JOIN `imdb_movie_status`
-    ON `imdb_movie`.`imdb_movie_status_id` = `imdb_movie_status`.`id`
-      WHERE `imdb_id` = ?
-";
-$statement5 = db::query($query5, [$_GET['id']]);
-$data5 = $statement5->fetchAll();
-
-//var_dump($data5);
-echo ($data5[0]['label']);
-?>
-
-
-
-
-
-
- <!-- <ul>
-
-    <?php foreach($data as $imdb_movie) : ?>
-    <li> <?php echo 'name: '.$imdb_movie['name']; ?> </li>
-    <li> <?php echo 'rating: '.$imdb_movie['rating']; ?> </li>
-    <li> <?php echo 'Votes: '.$imdb_movie['votes_nr']; ?> </li>
-    <li> <?php echo 'length: '.$imdb_movie['length']; ?> </li>
-
-    <?php echo '<br>'; ?>
-    <?php endforeach; ?>
-   
-
-
-    </ul>
- -->
+-->
 
 
 
