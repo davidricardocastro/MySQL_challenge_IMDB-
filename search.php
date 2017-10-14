@@ -68,8 +68,36 @@ $data = $statement->fetchAll();
   background-color: #f1f1f1;
 }
 </style>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+        crossorigin="anonymous">
+
 </head>
 <body>
+<div class="container-fluid  bg-dark">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="home.php">Movies</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+
+                    
+
+                    
+
+                    
+                </ul>
+
+            </div>
+        </nav>
+
+
+<div class="row">
+<div class="col">
 
 <h1>movies</h1>
   
@@ -86,7 +114,7 @@ $data = $statement->fetchAll();
 
 
 
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for movies.." title="Type in a name">
 
 <table id="myTable">
   <tr class="header">
@@ -125,6 +153,11 @@ function myFunction() {
   }
 }
 </script>
+</div>
+</div>
+
+</div>
+
 
 </body>
 </html>

@@ -129,6 +129,7 @@ $data10 = $statement10->fetchAll();
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
         crossorigin="anonymous">
 
+        
 
     <style>
 
@@ -141,8 +142,8 @@ $data10 = $statement10->fetchAll();
 
     <div class="container-fluid bg-dark">
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#top">Movie</a>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="home.php">Movies</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
@@ -160,9 +161,11 @@ $data10 = $statement10->fetchAll();
                         <a class="nav-link" href="#plot">Plot</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#cast">Cast</a>
+                        <a class="nav-link" href="#credits">Credits</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="search.php">Search</a>
+                    </li>
                     
                 </ul>
 
@@ -175,13 +178,13 @@ $data10 = $statement10->fetchAll();
 
 
                 
-                <div class="col-4 p-3 mb-2 text-white">
+                <div class="col-md-3 col-12 p-3 mb-2 text-white text-center">
 
-                    <img class="rounded mx-auto d-block img-fluid" src="img/<?php echo $_GET['id']?>.jpg" alt="">
+                    <img class="rounded  img-fluid" src="img/<?php echo $_GET['id']?>.jpg" alt="">
 
                 </div>
 
-                <div class="col-4 p-3 mb-2 text-white ">
+                <div class=" col-md-4 col-12 p-3 mb-2 text-white ">
                     <h1><?php echo $data[0]['name']?></h1>
                     <h6>Run time: <?php echo $data[0]['length']?> min</h6>
                     <h6>Gender:<?php foreach($data3 as $imdb_genre) : ?>
@@ -192,12 +195,12 @@ $data10 = $statement10->fetchAll();
                     <h6>Votes: <?php echo $data[0]['votes_nr']?></h6>
                     <h6>Type: <?php echo ($data4[0]['name']); ?> </h6>
                     <h6>Status: <?php echo ($data5[0]['label']);?> </h6>
-                    <br>
-                    <p><b><?php echo $data2[0]['small_plot']?></b></p>
+                   
+                    
                 </div>
 
-              
-                
+              <div class=" col-12 p-3 mb-2 text-white">
+              <p><b><?php echo $data2[0]['small_plot']?></b></p>
             </div>
         </section>
 
@@ -205,10 +208,10 @@ $data10 = $statement10->fetchAll();
 
     
 
-        <section id="trailer">
+        <section id="credits">
             <div class="row">
 
-            <div class="col p-3 mb-2 border rounded bg-dark text-white">
+            <div class="col-md-8 col-12 p-3 mb-2 border rounded bg-dark text-white">
                     <h5>Directed by: </h5>
                     
                     <?php 
@@ -249,7 +252,7 @@ $data10 = $statement10->fetchAll();
 
 
                 </div>
-                <div class="col-4 p-5 mb-2 border rounded bg-dark text-white">
+                <div id="trailer" class="col-md-4 col-12 p-5 mb-2 border rounded bg-dark text-white">
                     <div class="embed-responsive embed-responsive-16by9">
                         
                         <iframe class="embed-responsive-item" src="<?php echo $data2[0]['trailer']?>" frameborder="0" allowfullscreen></iframe>
